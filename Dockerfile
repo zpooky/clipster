@@ -2,8 +2,8 @@ FROM ubuntu:18.04
 
 MAINTAINER mrichar1 "https://github.com/mrichar1"
 
-# Setup timezone to avoid tzdata pkg hanging
-ENV TZ=Europe/London
+# Avoid questions during apt/dpkg installs
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install required python deps and tools
 RUN apt-get update
