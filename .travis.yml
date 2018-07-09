@@ -1,27 +1,7 @@
 language: python
-sudo: false
-dist: trusty
-python:
-  - 2.7
-  - 3.4
-virtualenv:
-  system_site_packages: true
+sudo: required
+services:
+  - docker
 script:
-  - "xvfb-run -a ./.travis/run.sh"
-addons:
-  apt:
-    packages:
-     - ibus
-     - python-gi
-     - python3-gi
-     - python-gobject
-     - gir1.2-glib-2.0
-     - gir1.2-ibus-1.0
-     - libwnck-3-0
-     - gir1.2-wnck-3.0
-     - libgtk-3-0
-     - gir1.2-gtk-3.0
-     - xvfb
-install:
-  - pip install pep8
-  - pip install pylint
+  - docker build --tag mrichar1/clipster .
+  - docker run --tag mrichar1/clipster
