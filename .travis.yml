@@ -4,4 +4,5 @@ services:
   - docker
 script:
   - docker build --tag mrichar1/clipster .
-  - docker run mrichar1/clipster
+  - docker run mrichar1/clipster "xvfb-run -a /root/clipster/run.sh"
+
