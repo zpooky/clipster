@@ -6,13 +6,10 @@ MAINTAINER mrichar1 "https://github.com/mrichar1"
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install required python deps and tools
-RUN apt-get update
-RUN apt-get install -y --force-yes git
-RUN apt-get install -y --force-yes ibus python3-gi gir1.2-glib-2.0 gir1.2-ibus-1.0 libwnck-3-0 gir1.2-wnck-3.0 libgtk-3-0 gir1.2-gtk-3.0 xvfb
-RUN apt-get install -y python3-pycodestyle pylint3
-
+RUN apt-get update -y
+RUN apt-get install -y ibus python3-gi gir1.2-glib-2.0 gir1.2-ibus-1.0 libwnck-3-0 gir1.2-wnck-3.0 libgtk-3-0 gir1.2-gtk-3.0 xvfb python3-pycodestyle pylint3
 COPY * /clipster/
-RUN ls -l /clipster
 
+CMD /usr/bin/xvfb-run -a /clipster/run.sh
 
 
