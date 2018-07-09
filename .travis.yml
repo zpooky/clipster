@@ -4,4 +4,4 @@ services:
   - docker
 script:
   - docker build --tag mrichar1/clipster .
-  - docker run --tag mrichar1/clipster
+  - docker run mrichar1/clipster
