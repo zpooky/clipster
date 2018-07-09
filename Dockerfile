@@ -12,6 +12,7 @@ RUN apt-get install -y --force-yes ibus python3-gi gir1.2-glib-2.0 gir1.2-ibus-1
 RUN apt-get install -y python3-pycodestyle pylint3
 
 COPY * /clipster/
+RUN ls -l /clipster
 
 
 
