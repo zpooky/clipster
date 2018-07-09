@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install required python deps and tools
 RUN apt-get update -y
-RUN apt-get install -y ibus python3-gi gir1.2-glib-2.0 gir1.2-ibus-1.0 libwnck-3-0 gir1.2-wnck-3.0 libgtk-3-0 gir1.2-gtk-3.0 xvfb python3-pycodestyle pylint3
+RUN apt-get install -y ibus python3-gi gir1.2-glib-2.0 gir1.2-ibus-1.0 libwnck-3-0 gir1.2-wnck-3.0 libgtk-3-0 gir1.2-gtk-3.0 xvfb python3-pycodestyle pycodestyle pylint3
 COPY * /clipster/
 
 CMD /usr/bin/xvfb-run -a /clipster/run.sh
