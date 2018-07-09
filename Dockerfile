@@ -11,4 +11,4 @@ RUN apt-get install -y ibus python3-gi gir1.2-glib-2.0 gir1.2-ibus-1.0 libwnck-3
 
 COPY . /clipster/
 RUN ls /clipster
-CMD /usr/bin/xvfb-run -a /clipster/run.sh
+CMD /usr/bin/xvfb-run -a /clipster/travis/run.sh
