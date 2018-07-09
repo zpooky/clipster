@@ -7,5 +7,5 @@ set -x
 pycodestyle --ignore=E402,E501 /clipster/clipster
 pylint3 --errors-only /clipster/clipster
 
-python3 /clipster/tests/tests.py
+python3 /clipster/tests.py
 
