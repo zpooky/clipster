@@ -4,4 +4,4 @@ services:
   - docker
 script:
   - docker build --tag mrichar1/clipster .
-  - docker run mrichar1/clipster
+  - docker run -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix mrichar1/clipster
