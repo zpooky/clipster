@@ -28,10 +28,10 @@ except (ImportError, ValueError):
 
 if sys.version_info.major == 3:
     # py 3.x
-    from configparser import ConfigParser as SafeConfigParser
+    import configparser
 else:
     # py 2.x
-    from ConfigParser import SafeConfigParser
+    import ConfigParser as configparser
     # In python 2, ENOENT is sometimes IOError and sometimes OSError. Catch
     # both by catching their immediate superclass exception EnvironmentError.
     FileNotFoundError = EnvironmentError  # pylint: disable=redefined-builtin
