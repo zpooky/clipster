@@ -215,6 +215,8 @@ class Daemon(object):
         else:
             logging.error("'whitelist_classes' or 'blacklist_classes' require Wnck (libwnck3).")
 
+        self.sync_blacklist_classes = get_list_from_option_string(self.config.get('clipster', 'sync_blacklist_classes'))
+
     def keypress_handler(self, widget, event, board, tree_select):
         """Handle selection_widget keypress events."""
 
@@ -379,7 +381,7 @@ class Daemon(object):
             # Flag the history file for updating
             self.update_history_file = True
 
-    def update_history(self, board, text):
+    def update_history(self, board, text, p_owner=None):
         """Update the in-memory clipboard history."""
 
         for ignore in self.ignore_patterns:
@@ -446,13 +448,15 @@ class Daemon(object):
             self.write_history_file()
         logging.debug(self.boards[board])
         if self.config.getboolean('clipster', 'sync_selections'):
-            # Whichever board we just set, set the other one, if it's active
-            boards = list(self.boards)
-            boards.remove(board)
-            # Stop if the board already contains the text.
-            if boards[0] in self.config.get('clipster', 'active_selections') and self.read_board(boards[0]) != text:
-                logging.debug("Syncing board %s to %s", board, boards[0])
-                self.update_board(boards[0], text)
+            if p_owner is None or p_owner not in self.sync_blacklist_classes:
+            # if p_owner is None or p_owner != "Firefox-esr".lower():
+                # Whichever board we just set, set the other one, if it's active
+                boards = list(self.boards)
+                boards.remove(board)
+                # Stop if the board already contains the text.
+                if boards[0] in self.config.get('clipster', 'active_selections') and self.read_board(boards[0]) != text:
+                    logging.debug("Syncing board %s to %s", board, boards[0])
+                    self.update_board(boards[0], text)
 
     def owner_change(self, board, event):
         """Handler for owner-change clipboard events."""
@@ -487,7 +491,7 @@ class Daemon(object):
         text = board.wait_for_text()
         if text:
             logging.debug("Selection is text.")
-            self.update_history(selection, text)
+            self.update_history(selection, text,wm_class)
             # If no text received, either the selection was an empty string,
             # or the board contains non-text content.
         else:
